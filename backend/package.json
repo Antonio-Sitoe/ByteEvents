@@ -11,7 +11,8 @@
     "type-check": "tsc --noEmit",
     "generate": "npx drizzle-kit generate",
     "migrate": "npx drizzle-kit migrate",
-    "studio": "npx drizzle-kit studio"
+    "studio": "npx drizzle-kit studio",
+    "seed": "tsx src/db/seed.ts"
   },
   "keywords": [
     "events",
