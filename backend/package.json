@@ -2,13 +2,16 @@
   "name": "byteevents-backend",
   "version": "1.0.0",
   "description": "Sistema de Gestão de Eventos - Backend",
-  "main": "dist/server.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
-    "dev": "tsx watch src/server.ts",
+    "start": "node dist/app.js",
+    "dev": "tsx watch src/app.ts",
     "test": "jest",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "generate": "npx drizzle-kit generate",
+    "migrate": "npx drizzle-kit migrate",
+    "studio": "npx drizzle-kit studio"
   },
   "keywords": [
     "events",
