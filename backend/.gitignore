@@ -55,7 +55,7 @@ jspm_packages/
 .idea/
 *.swp
 *.swo
-
+dist
 # OS
 .DS_Store
 Thumbs.db
