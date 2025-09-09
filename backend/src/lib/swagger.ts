@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import swagger from '@fastify/swagger'
 import swaggerUi from '@fastify/swagger-ui'
 import { env } from './env'
@@ -40,10 +40,10 @@ export function swaggerConfig(app: FastifyInstance) {
       deepLinking: false,
     },
     uiHooks: {
-      onRequest: function (_request, _reply, next) {
+      onRequest: (_request, _reply, next) => {
         next()
       },
-      preHandler: function (_request, _reply, next) {
+      preHandler: (_request, _reply, next) => {
         next()
       },
     },

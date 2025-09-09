@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 const envSchema = z.object({
   PORT: z
     .string()
-    .transform((val) => parseInt(val))
+    .transform((val) => Number.parseInt(val))
     .default(3333),
   DATABASE_URL: z.string(),
 })

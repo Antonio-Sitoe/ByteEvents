@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 
 export async function healthRoutes(app: FastifyInstance) {
@@ -17,6 +17,6 @@ export async function healthRoutes(app: FastifyInstance) {
         timestamp: new Date().toISOString(),
         service: 'ByteEvents API',
       })
-    }
+    },
   )
 }

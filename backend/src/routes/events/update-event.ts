@@ -1,6 +1,6 @@
 import { eventModel } from '../../db/actions/events'
-import { IEventData } from '@/db/schemas'
-import { FastifyInstance } from 'fastify'
+import type { IEventData } from '@/db/schemas'
+import type { FastifyInstance } from 'fastify'
 
 export async function updateEvent(fastify: FastifyInstance): Promise<void> {
   fastify.put<{
@@ -32,6 +32,6 @@ export async function updateEvent(fastify: FastifyInstance): Promise<void> {
         fastify.log.error(error)
         return reply.code(500).send({ error: 'Internal server error' })
       }
-    }
+    },
   )
 }
