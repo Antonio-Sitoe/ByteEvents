@@ -1,7 +1,7 @@
 import { eventModel } from '@/db/actions/events'
-import { FastifyInstance } from 'fastify'
-import { ICreateEventData } from '@/db/schemas/events'
-import { createEventSchema } from '@/utils/validation/create-event-schema'
+import type { FastifyInstance } from 'fastify'
+import type { ICreateEventData } from '@/db/schemas/events'
+import { createEventSchema } from '@/utils/schemas/events'
 import { userModel } from '@/db/actions/User'
 
 export async function createEvent(app: FastifyInstance) {
@@ -37,6 +37,6 @@ export async function createEvent(app: FastifyInstance) {
           error: 'Internal server error',
         })
       }
-    }
+    },
   )
 }

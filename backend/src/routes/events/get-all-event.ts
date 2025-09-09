@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import { eventModel } from '../../db/actions/events'
 
 export async function getAllEvent(fastify: FastifyInstance): Promise<void> {

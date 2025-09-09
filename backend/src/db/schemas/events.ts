@@ -1,11 +1,7 @@
 import { users } from './user'
 import { pgTable, text, timestamp, uuid, pgEnum } from 'drizzle-orm/pg-core'
 
-export const eventStatus = pgEnum('event_status', [
-  'DRAFT',
-  'PUBLISHED',
-  'FINISHED',
-])
+export const eventStatus = pgEnum('event_status', ['DRAFT', 'PUBLISHED', 'FINISHED'])
 
 export const events = pgTable('events', {
   id: uuid('id').primaryKey().defaultRandom(),

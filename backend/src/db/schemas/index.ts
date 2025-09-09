@@ -1,1 +1,5 @@
 export * from './user'
+export * from './events'
+export * from './speakers'
+export * from './contacts'
+export * from './inventations'
