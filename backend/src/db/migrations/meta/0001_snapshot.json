@@ -1,6 +1,6 @@
 {
-  "id": "6ed54f68-e87f-4e26-ba36-247ecf707ec3",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "49afa789-80e7-4a12-b7a7-c3b8a373711c",
+  "prevId": "6ed54f68-e87f-4e26-ba36-247ecf707ec3",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -197,8 +197,8 @@
           "notNull": true,
           "default": 60
         },
-        "event_id": {
-          "name": "event_id",
+        "eventId": {
+          "name": "eventId",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
@@ -220,11 +220,11 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "speakers_event_id_events_id_fk": {
-          "name": "speakers_event_id_events_id_fk",
+        "speakers_eventId_events_id_fk": {
+          "name": "speakers_eventId_events_id_fk",
           "tableFrom": "speakers",
           "tableTo": "events",
-          "columnsFrom": ["event_id"],
+          "columnsFrom": ["eventId"],
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"

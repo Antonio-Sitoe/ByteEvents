@@ -1,9 +1,76 @@
 {
-  "id": "6ed54f68-e87f-4e26-ba36-247ecf707ec3",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "36053b43-fa1e-4210-86e5-035c32df392d",
+  "prevId": "49afa789-80e7-4a12-b7a7-c3b8a373711c",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.contacts": {
+      "name": "contacts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tags": {
+          "name": "tags",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'[]'::json"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "contacts_email_unique": {
+          "name": "contacts_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.events": {
       "name": "events",
       "schema": "",
@@ -79,8 +146,12 @@
           "name": "events_organizer_id_users_id_fk",
           "tableFrom": "events",
           "tableTo": "users",
-          "columnsFrom": ["organizer_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "organizer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -148,7 +219,9 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       },
       "policies": {},
@@ -197,8 +270,8 @@
           "notNull": true,
           "default": 60
         },
-        "event_id": {
-          "name": "event_id",
+        "eventId": {
+          "name": "eventId",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
@@ -220,12 +293,16 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "speakers_event_id_events_id_fk": {
-          "name": "speakers_event_id_events_id_fk",
+        "speakers_eventId_events_id_fk": {
+          "name": "speakers_eventId_events_id_fk",
           "tableFrom": "speakers",
           "tableTo": "events",
-          "columnsFrom": ["event_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "eventId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -241,7 +318,11 @@
     "public.event_status": {
       "name": "event_status",
       "schema": "public",
-      "values": ["DRAFT", "PUBLISHED", "FINISHED"]
+      "values": [
+        "DRAFT",
+        "PUBLISHED",
+        "FINISHED"
+      ]
     }
   },
   "schemas": {},

@@ -16,7 +16,7 @@ CREATE TABLE "users" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" varchar NOT NULL,
 	"email" varchar NOT NULL,
-	"password_hash" varchar,
+	"password_hash" varchar NOT NULL,
 	"role" varchar NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
@@ -25,13 +25,14 @@ CREATE TABLE "users" (
 --> statement-breakpoint
 CREATE TABLE "speakers" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"event_id" uuid,
 	"name" text NOT NULL,
+	"topic" text NOT NULL,
 	"bio" text,
-	"photo_url" text,
-	"topic" text,
-	"social_links" jsonb,
-	"created_at" timestamp DEFAULT now() NOT NULL
+	"startTime" timestamp NOT NULL,
+	"duration" integer DEFAULT 60 NOT NULL,
+	"event_id" uuid,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 ALTER TABLE "events" ADD CONSTRAINT "events_organizer_id_users_id_fk" FOREIGN KEY ("organizer_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
