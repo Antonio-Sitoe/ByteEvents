@@ -27,9 +27,7 @@ export async function updateContactRoute(fastify: FastifyInstance) {
 
       const emailContact = await contactModel.findByEmail(contactData.email)
       if (emailContact && emailContact?.id !== contactId) {
-        return reply
-          .code(400)
-          .send({ error: 'Email already taken by another contact' })
+        return reply.code(400).send({ error: 'Email already taken by another contact' })
       }
 
       const contact = await contactModel.update(contactId, contactData)
@@ -39,6 +37,6 @@ export async function updateContactRoute(fastify: FastifyInstance) {
       }
 
       return reply.send({ message: 'Contact updated successfully', contact })
-    }
+    },
   )
 }

@@ -7,7 +7,7 @@ import { getContactsRoute } from './get-contact'
 
 async function contactsRoutes(
   fastify: FastifyInstance,
-  _options: FastifyPluginOptions
+  _options: FastifyPluginOptions,
 ): Promise<void> {
   await fastify.register(createContactRoute)
   await fastify.register(getContactByIdRoute)

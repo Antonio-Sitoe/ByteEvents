@@ -20,6 +20,6 @@ export async function deleteContactRoute(fastify: FastifyInstance) {
       }
       await contactModel.delete(contactId)
       return reply.send({ message: 'Contact deleted successfully', contactId })
-    }
+    },
   )
 }

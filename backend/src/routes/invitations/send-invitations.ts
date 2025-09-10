@@ -32,7 +32,7 @@ export async function sendInvitationsRoute(fastify: FastifyInstance) {
         for await (const email of emails) {
           const contact = await contactModel.findByEmail(email)
           if (contact) {
-            const ticket = `${uuidv4().slice(0, 8) + contact?.name}`
+            const ticket = `${uuidv4() + contact?.name}`
               .replace(/\s+/g, '')
               .trim()
               .toLowerCase()

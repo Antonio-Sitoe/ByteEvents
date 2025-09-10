@@ -31,9 +31,7 @@ export async function updateSpeakerRoute(fastify: FastifyInstance) {
         }
 
         if (!existingSpeaker.eventId) {
-          return reply
-            .code(404)
-            .send({ error: 'Speaker has no associated event' })
+          return reply.code(404).send({ error: 'Speaker has no associated event' })
         }
 
         const event = await eventModel.findById(existingSpeaker.eventId)
@@ -52,10 +50,8 @@ export async function updateSpeakerRoute(fastify: FastifyInstance) {
         })
       } catch (error) {
         fastify.log.error(error)
-        return reply
-          .code(500)
-          .send({ error: 'Internal server error, failed to update speaker' })
+        return reply.code(500).send({ error: 'Internal server error, failed to update speaker' })
       }
-    }
+    },
   )
 }
