@@ -28,3 +28,4 @@ export type AcceptInvitationInput = z.infer<typeof acceptInvitationSchema>
 export type InvitationQueryInput = z.infer<typeof invitationQuerySchema>
 export type InvitationParamsInput = z.infer<typeof invitationParamsSchema>
 export type InvitationIdParamsInput = z.infer<typeof invitationIdParamsSchema>
+

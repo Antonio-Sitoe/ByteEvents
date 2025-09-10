@@ -1,6 +1,6 @@
 import { db } from '../db'
 import { invitations, contacts } from '../schemas'
-import { eq, and } from 'drizzle-orm'
+import { eq, and, sql } from 'drizzle-orm'
 import type { ICreateInvitationData } from '../schemas'
 
 export class InvitationModel {
@@ -70,6 +70,28 @@ export class InvitationModel {
       .where(eq(invitations.id, invitationId))
       .returning()
     return deleted || null
+  }
+
+  async getRegistrationsEvolution(eventId: string) {
+    const rows = await db
+      .select({
+        date: sql<string>`DATE(${invitations.createdAt})`,
+        registrations: sql<number>`COUNT(*)`,
+      })
+      .from(invitations)
+      .where(
+        and(
+          eq(invitations.eventId, eventId),
+          eq(invitations.status, 'accepted')
+        )
+      )
+      .groupBy(sql`DATE(${invitations.createdAt})`)
+      .orderBy(sql`DATE(${invitations.createdAt})`)
+
+    return rows.map((r) => ({
+      date: r.date,
+      registrations: Number(r.registrations),
+    }))
   }
 }
 

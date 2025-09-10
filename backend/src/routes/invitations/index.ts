@@ -2,9 +2,11 @@ import type { FastifyInstance } from 'fastify'
 import { sendInvitationsRoute } from './send-invitations'
 import { acceptInvitationRoute } from './accept-invitation'
 import { getInvitationStatsRoute } from './get-invitation-stats'
+import { getRegistrationEvolution } from './get-registration-evotlution'
 
-export async function invitationRoutes(fastify: FastifyInstance) {
-  await fastify.register(sendInvitationsRoute)
-  await fastify.register(acceptInvitationRoute)
-  await fastify.register(getInvitationStatsRoute)
+export function invitationRoutes(fastify: FastifyInstance) {
+  fastify.register(sendInvitationsRoute)
+  fastify.register(acceptInvitationRoute)
+  fastify.register(getInvitationStatsRoute)
+  fastify.register(getRegistrationEvolution)
 }
