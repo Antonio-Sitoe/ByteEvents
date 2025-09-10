@@ -21,20 +21,12 @@ export class ContactModel {
   }
 
   async findById(id: string): Promise<IContactData | undefined> {
-    const [row] = await db
-      .select()
-      .from(contacts)
-      .where(eq(contacts.id, id))
-      .limit(1)
+    const [row] = await db.select().from(contacts).where(eq(contacts.id, id)).limit(1)
     return row ?? undefined
   }
 
   async findByEmail(email: string): Promise<IContactData | undefined> {
-    const [row] = await db
-      .select()
-      .from(contacts)
-      .where(eq(contacts.email, email))
-      .limit(1)
+    const [row] = await db.select().from(contacts).where(eq(contacts.email, email)).limit(1)
     return row ?? undefined
   }
 
@@ -55,7 +47,7 @@ export class ContactModel {
 
   async update(
     id: string,
-    contactData: Partial<{ name: string; email: string; phone?: string }>
+    contactData: Partial<{ name: string; email: string; phone?: string }>,
   ): Promise<IContactData | undefined> {
     const changes: Partial<typeof contacts.$inferInsert> = {
       updated_at: new Date(),
@@ -69,10 +61,7 @@ export class ContactModel {
   }
 
   async delete(id: string): Promise<{ changes: number }> {
-    const deleted = await db
-      .delete(contacts)
-      .where(eq(contacts.id, id))
-      .returning()
+    const deleted = await db.delete(contacts).where(eq(contacts.id, id)).returning()
     return { changes: deleted.length }
   }
 }

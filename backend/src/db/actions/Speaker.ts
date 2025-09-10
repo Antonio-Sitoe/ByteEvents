@@ -24,7 +24,6 @@ export class SpeakerModel {
 
   async findById(id: string) {
     const [speaker] = await db.select().from(speakers).where(eq(speakers.id, id)).limit(1)
-
     return speaker
   }
 
