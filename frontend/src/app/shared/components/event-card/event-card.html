@@ -4,9 +4,9 @@
   <div class="card-body">
     <div class="flex items-start justify-between">
       <h3 class="card-title text-lg">{{ title }}</h3>
-      <div class="badge px-2" [ngClass]="status === 'published' ? 'badge-success' : 'badge-info'">
+      <div class="badge px-2" [ngClass]="badgeColor()">
         <span class="text-xs">
-          {{ status === 'published' ? 'Publicado' : 'Rascunho' }}
+          {{ getStatusLabel() }}
         </span>
       </div>
     </div>
@@ -17,16 +17,14 @@
       @if (eventDate) {
       <div class="flex items-center gap-2">
         <ng-icon name="lucideCalendar" class="h-4 w-4 text-base-content/60"></ng-icon>
-        <span>{{ eventDate | date : 'mediumDate' }}</span>
+        <span>{{ eventDate | date : 'medium' }}</span>
       </div>
       }
       <span></span>
-      @if (registeredParticipants !== undefined && maxParticipants !== undefined) {
       <div class="flex items-center gap-2">
-        <ng-icon name="lucideUsers" class="h-4 w-4 text-base-content/60"></ng-icon>
-        <span>{{ registeredParticipants }} / {{ maxParticipants }}</span>
+        <ng-icon name="lucideHouse" class="h-4 w-4 text-base-content/60"></ng-icon>
+        <span>{{ location }}</span>
       </div>
-      }
     </div>
 
     <div class="card-actions mt-4">
