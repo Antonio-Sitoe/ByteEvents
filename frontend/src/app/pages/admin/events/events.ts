@@ -4,10 +4,10 @@ import { IEventData } from '@/core/@types/events';
 import { EventsService } from '@/core/http/events';
 import { NgIconComponent } from '@ng-icons/core';
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { CreateEvent } from '@/shared/components/modals/create-event/create-event';
 @Component({
   selector: 'app-events',
-  imports: [Header, NgIconComponent, EventCard, DatePipe],
+  imports: [Header, NgIconComponent, EventCard, CreateEvent],
   templateUrl: './events.html',
 })
 export class Events implements OnInit {
