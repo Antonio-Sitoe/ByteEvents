@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
+import { ZardDialogRef } from '../../dialog/dialog-ref';
+
 import { ZardFormModule } from '../../form/form.module';
 import { ZardInputDirective } from '../../input/input.directive';
 import { ZardButtonComponent } from '../../button/button.component';
@@ -40,7 +42,7 @@ export interface FormData {
 export class CreateEvent {
   private readonly fb = inject(FormBuilder);
   private readonly eventsService = inject(EventsService);
-
+  private readonly dialogRef = inject(ZardDialogRef);
   readonly showSuccess = signal(false);
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal('');
@@ -105,6 +107,7 @@ export class CreateEvent {
         end_datetime: formData.end_datetime,
         location: formData.location,
         status: 'DRAFT',
+        organizer_id: 'cc47f8bb-4534-4921-a77c-d3b14d251d54',
       };
 
       await firstValueFrom(this.eventsService.createEvent(eventData));
@@ -117,7 +120,8 @@ export class CreateEvent {
 
       setTimeout(() => {
         this.showSuccess.set(false);
-      }, 5000);
+        this.dialogRef.close({ success: true });
+      }, 1000);
     } catch (error) {
       this.isSubmitting.set(false);
       console.error('Error creating event:', error);

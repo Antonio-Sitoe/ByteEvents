@@ -13,7 +13,4 @@ export interface IEventData {
   updated_at: string;
 }
 
-export type ICreateEventData = Omit<
-  IEventData,
-  'id' | 'organizer_id' | 'created_at' | 'updated_at'
->;
+export type ICreateEventData = Omit<IEventData, 'id' | 'created_at' | 'updated_at'>;

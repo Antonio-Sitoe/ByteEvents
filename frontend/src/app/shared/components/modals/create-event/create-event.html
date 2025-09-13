@@ -1,100 +1,94 @@
-<dialog id="create_event_modal" class="modal">
-  <div class="modal-box w-11/12 max-w-lg bg-white">
-    <h3 class="text-lg font-bold mb-3">Criar Novo Evento</h3>
+<div class="space-y-6 bg-white w-full">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="space-y-6">
+    <z-form-field>
+      <label z-form-label zRequired for="title">Titulo do Evento</label>
+      <z-form-control [errorMessage]="isFieldInvalid('title') ? 'Digite o titulo do evento' : ''">
+        <input
+          z-input
+          id="title"
+          type="text"
+          placeholder="Escreve aqui..."
+          formControlName="title"
+          class="input placeholder:text-gray-400"
+        />
+      </z-form-control>
+    </z-form-field>
 
-    <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="space-y-6">
+    <div class="flex items-start gap-4">
       <z-form-field>
-        <label z-form-label zRequired for="title">Titulo do Evento</label>
-        <z-form-control [errorMessage]="isFieldInvalid('title') ? 'Digite o titulo do evento' : ''">
+        <label z-form-label for="start_datetime">Data de inicio do evento</label>
+        <z-form-control
+          [errorMessage]="isFieldInvalid('start_datetime') ? 'Data de início é obrigatória' : ''"
+        >
           <input
             z-input
-            id="title"
-            type="text"
-            placeholder="Escreve aqui..."
-            formControlName="title"
-            class="input placeholder:text-gray-400"
+            id="start_datetime"
+            type="datetime-local"
+            placeholder="Data de inicio"
+            formControlName="start_datetime"
           />
         </z-form-control>
       </z-form-field>
 
-      <div class="flex items-start gap-4">
-        <z-form-field>
-          <label z-form-label for="start_datetime">Data de inicio do evento</label>
-          <z-form-control
-            [errorMessage]="isFieldInvalid('start_datetime') ? 'Data de início é obrigatória' : ''"
-          >
-            <input
-              z-input
-              id="start_datetime"
-              type="datetime-local"
-              placeholder="Data de inicio"
-              formControlName="start_datetime"
-            />
-          </z-form-control>
-        </z-form-field>
-
-        <z-form-field>
-          <label z-form-label for="end_datetime">Data do fim do evento</label>
-          <z-form-control
-            [errorMessage]="isFieldInvalid('end_datetime') ? 'Data de fim é obrigatória' : ''"
-          >
-            <input z-input id="end_datetime" type="datetime-local" formControlName="end_datetime" />
-          </z-form-control>
-        </z-form-field>
-      </div>
-
-      @if (getDateError()) {
-      <div class="p-3 bg-red-50 border border-red-200 rounded-md">
-        <span class="text-red-600 text-sm">{{ getDateError() }}</span>
-      </div>
-      }
-
       <z-form-field>
-        <label z-form-label for="description">Descrição</label>
+        <label z-form-label for="end_datetime">Data do fim do evento</label>
         <z-form-control
-          [errorMessage]="isFieldInvalid('description') ? 'Digite a descrição do evento' : ''"
+          [errorMessage]="isFieldInvalid('end_datetime') ? 'Data de fim é obrigatória' : ''"
         >
-          <textarea
-            z-input
-            id="description"
-            rows="4"
-            placeholder="Descreva o evento..."
-            formControlName="description"
-          ></textarea>
+          <input z-input id="end_datetime" type="datetime-local" formControlName="end_datetime" />
         </z-form-control>
       </z-form-field>
+    </div>
 
-      <z-form-field>
-        <label z-form-label for="location">Local</label>
-        <z-form-control
-          [errorMessage]="isFieldInvalid('location') ? 'Digite o local do evento' : ''"
-        >
-          <input
-            z-input
-            id="location"
-            type="text"
-            placeholder="Digite o local do evento"
-            formControlName="location"
-          />
-        </z-form-control>
-      </z-form-field>
+    @if (getDateError()) {
+    <div class="p-3 bg-red-50 border border-red-200 rounded-md">
+      <span class="text-red-600 text-sm">{{ getDateError() }}</span>
+    </div>
+    }
 
-      <div class="flex gap-2">
-        <button class="rounded-md btn" z-button zType="outline" type="submit">
-          {{ isSubmitting() ? 'Guardando...' : 'Guardar' }}
-        </button>
-        <button z-button zType="outline" type="button" (click)="resetForm()">Reset</button>
-      </div>
+    <z-form-field>
+      <label z-form-label for="description">Descrição</label>
+      <z-form-control
+        [errorMessage]="isFieldInvalid('description') ? 'Digite a descrição do evento' : ''"
+      >
+        <textarea
+          z-input
+          id="description"
+          rows="4"
+          placeholder="Descreva o evento..."
+          formControlName="description"
+        ></textarea>
+      </z-form-control>
+    </z-form-field>
 
-      @if (showSuccess()) {
-      <div class="p-4 bg-green-50 border border-green-200 rounded-md">
-        <z-form-message zType="success">✓ Evento criado com sucesso</z-form-message>
-      </div>
-      } @if (errorMessage()) {
-      <div class="p-4 bg-red-50 border border-red-200 rounded-md">
-        <z-form-message zType="error">{{ errorMessage() }}</z-form-message>
-      </div>
-      }
-    </form>
-  </div>
-</dialog>
+    <z-form-field>
+      <label z-form-label for="location">Local</label>
+      <z-form-control [errorMessage]="isFieldInvalid('location') ? 'Digite o local do evento' : ''">
+        <input
+          z-input
+          id="location"
+          type="text"
+          placeholder="Digite o local do evento"
+          formControlName="location"
+        />
+      </z-form-control>
+    </z-form-field>
+
+    <div class="flex gap-2">
+      <button class="rounded-md btn" z-button zType="outline" type="submit">
+        {{ isSubmitting() ? 'Guardando...' : 'Guardar' }}
+      </button>
+      <button z-button zType="outline" type="button" (click)="resetForm()">Reset</button>
+    </div>
+
+    @if (showSuccess()) {
+    <div class="p-4 bg-green-50 border border-green-200 rounded-md">
+      <z-form-message zType="success">✓ Evento criado com sucesso</z-form-message>
+    </div>
+    } @if (errorMessage()) {
+    <div class="p-4 bg-red-50 border border-red-200 rounded-md">
+      <z-form-message zType="error">{{ errorMessage() }}</z-form-message>
+    </div>
+    }
+  </form>
+</div>

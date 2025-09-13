@@ -37,6 +37,6 @@ export async function createEvent(app: FastifyInstance) {
           error: 'Internal server error',
         })
       }
-    },
+    }
   )
 }

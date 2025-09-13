@@ -7,7 +7,14 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { lucideLogOut, lucidePlus, lucideCalendar, lucideEye, lucideHouse } from '@ng-icons/lucide';
+import {
+  lucideLogOut,
+  lucidePlus,
+  lucideCalendar,
+  lucideEye,
+  lucideHouse,
+  lucideX,
+} from '@ng-icons/lucide';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
@@ -21,7 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
     provideRouter(routes),
-    provideIcons({ lucideLogOut, lucidePlus, lucideCalendar, lucideHouse, lucideEye }),
+    provideIcons({ lucideLogOut, lucidePlus, lucideCalendar, lucideHouse, lucideEye, lucideX }),
     { provide: LOCALE_ID, useValue: 'pt' },
   ],
 };
