@@ -42,7 +42,9 @@ export const UpdateSpeakerSchema = z.object({
     .min(10, 'Biografia deve ter pelo menos 10 caracteres')
     .max(1000, 'Biografia deve ter no máximo 1000 caracteres')
     .optional(),
-  startTime: z.date('Data de início deve estar no formato ISO 8601').optional(),
+  startTime: z
+    .string('Data de início deve estar no formato ISO 8601')
+    .optional(),
   duration: z
     .number()
     .int()

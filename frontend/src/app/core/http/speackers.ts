@@ -27,4 +27,12 @@ export class SpeakersService {
   findById(id: string): Observable<ISpeaker> {
     return this.http.get<ISpeaker>(`${this.url}/${id}`);
   }
+
+  update(body: ISpeaker, id: string): Observable<ISpeaker> {
+    return this.http.put<ISpeaker>(`${this.url}/${id}`, body);
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
 }

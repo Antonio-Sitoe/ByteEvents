@@ -34,7 +34,7 @@
               <h3 class="font-semibold text-lg">{{ speaker.name }}</h3>
               <div class="badge badge-outline flex items-center gap-1">
                 <ng-icon name="lucideClock" class="h-3 w-3"></ng-icon>
-                {{ speaker.startTime | date : 'HH:mm' }} ({{ speaker.duration }}min)
+                {{ speaker.startTime }} ({{ speaker.duration }}min)
               </div>
             </div>
             <p class="font-medium text-sm text-primary mb-1">{{ speaker.topic }}</p>
@@ -45,7 +45,7 @@
             <button class="btn btn-ghost btn-sm" (click)="handleEditSpeaker(speaker)">
               <ng-icon name="lucidePencil" class="h-4 w-4"></ng-icon>
             </button>
-            <button class="btn btn-ghost btn-sm" (click)="handleDeleteSpeaker(speaker.name)">
+            <button class="btn btn-ghost btn-sm" (click)="handleDeleteSpeaker(speaker)">
               <ng-icon name="lucideTrash2" class="h-4 w-4"></ng-icon>
             </button>
           </div>
