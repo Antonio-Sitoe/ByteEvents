@@ -1,0 +1,36 @@
+<div class="bg-white rounded-lg shadow-lg border border-gray-200">
+  <div class="p-6">
+    <div class="flex items-center gap-2 mb-4">
+      <svg class="h-5 w-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="mb-4">
+      <div id="chart" class="w-full">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions.yaxis"
+          [dataLabels]="chartOptions.dataLabels"
+          [grid]="chartOptions.grid"
+          [stroke]="chartOptions.stroke"
+          [title]="chartOptions.title"
+          [tooltip]="chartOptions.tooltip"
+          [colors]="chartOptions.colors"
+        >
+        </apx-chart>
+      </div>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-2">
+      Número acumulado de inscrições desde o lançamento da divulgação
+    </p>
+  </div>
+</div>

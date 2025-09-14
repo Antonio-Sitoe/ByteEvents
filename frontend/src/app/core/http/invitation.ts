@@ -21,6 +21,14 @@ export interface AcceptInvitationData extends AuthParticipantData {
   eventId: string;
 }
 
+export interface IEventEvolutionResponse {
+  message: string;
+  data: {
+    registrations: number;
+    date: string;
+  }[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -44,5 +52,11 @@ export class InvitationService {
 
   getStatics(eventId: string): Observable<IEventStaticsResponse> {
     return this.http.get<IEventStaticsResponse>(`${this.url}/events/${eventId}/invitations/stats`);
+  }
+
+  getEvolution(eventId: string): Observable<IEventEvolutionResponse> {
+    return this.http.get<IEventEvolutionResponse>(
+      `${this.url}/events/${eventId}/invitations/evolution`
+    );
   }
 }
