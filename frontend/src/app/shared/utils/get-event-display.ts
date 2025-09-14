@@ -21,7 +21,7 @@ export function getEventDisplay(status: EventStatus) {
       case 'PUBLISHED':
         return 'badge-success';
       case 'DRAFT':
-        return 'badge-info';
+        return 'badge-draft';
       case 'FINISHED':
         return 'badge-neutral';
       case 'CANCELLED':

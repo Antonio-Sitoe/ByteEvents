@@ -1,0 +1,27 @@
+<div class="shadow w-full bg-gray-50 fixed z-50 top-0 left-0 navbar">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <button class="btn btn-ghost btn-sm" (click)="onBack()">
+          <ng-icon name="lucideArrowLeft" class="h-4 w-4"></ng-icon>
+        </button>
+        <div>
+          @if (isLoading) {
+          <div class="loading loading-spinner loading-lg"></div>
+          } @else {
+          <h1 class="text-xl font-bold">{{ event?.title }}</h1>
+          }
+          <p class="text-sm text-muted-foreground">
+            {{ event?.start_datetime | date : 'medium' : 'pt' }} • {{ event?.location }}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <div class="badge" [ngClass]="badgeColor()">
+          {{ getStatusLabel() }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

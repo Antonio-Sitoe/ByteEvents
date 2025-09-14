@@ -1,0 +1,58 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h2 class="text-xl font-bold">Gestão do Evento</h2>
+    <button class="btn rounded-md bg-gray-950" (click)="openAddSpeakerModal()">
+      <ng-icon name="lucidePlus" class="w-5 h-5"></ng-icon>
+      Adicionar Palestrante
+    </button>
+  </div>
+
+  <div class="card bg-white shadow-lg">
+    <div class="card-body">
+      <div class="flex items-center gap-2 mb-4">
+        <ng-icon name="lucideUsers" class="h-5 w-5"></ng-icon>
+        <h3 class="card-title">Lineup do Evento ({{ speakers().length }} palestrantes)</h3>
+      </div>
+
+      @if (isLoading) {
+      <div class="flex justify-center items-center mt-8">
+        <div class="loading loading-spinner loading-lg"></div>
+      </div>
+      } @else if (speakers().length === 0) {
+      <div class="text-center py-8 text-gray-500">
+        <p>Nenhum palestrante adicionado ainda.</p>
+        <p class="text-sm">Adicione palestrantes para montar o lineup do evento.</p>
+      </div>
+      } @else {
+      <div class="space-y-4">
+        @for (speaker of speakers(); track speaker.name) {
+        <div
+          class="flex items-center justify-between p-4 border border-gray-200 rounded-lg bg-gray-50"
+        >
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <h3 class="font-semibold text-lg">{{ speaker.name }}</h3>
+              <div class="badge badge-outline flex items-center gap-1">
+                <ng-icon name="lucideClock" class="h-3 w-3"></ng-icon>
+                {{ speaker.startTime | date : 'HH:mm' }} ({{ speaker.duration }}min)
+              </div>
+            </div>
+            <p class="font-medium text-sm text-primary mb-1">{{ speaker.topic }}</p>
+            <p class="text-sm text-gray-600 line-clamp-2">{{ speaker.bio }}</p>
+          </div>
+
+          <div class="flex gap-2 ml-4">
+            <button class="btn btn-ghost btn-sm" (click)="handleEditSpeaker(speaker)">
+              <ng-icon name="lucidePencil" class="h-4 w-4"></ng-icon>
+            </button>
+            <button class="btn btn-ghost btn-sm" (click)="handleDeleteSpeaker(speaker.name)">
+              <ng-icon name="lucideTrash2" class="h-4 w-4"></ng-icon>
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

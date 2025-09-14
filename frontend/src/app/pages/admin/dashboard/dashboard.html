@@ -1,0 +1,51 @@
+<app-header-dashboard [event]="event" [isLoading]="isLoading" />
+<main class="container mt-30 w-full mx-auto px-4 py-8 z-10">
+  <div class="bg-gray-100 rounded-lg p-2 mb-6 flex gap-2">
+    <button
+      class="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold transition-all duration-200"
+      [class]="
+        activeTab() === 'dashboard'
+          ? 'bg-white shadow-sm text-black'
+          : 'text-black hover:bg-gray-200'
+      "
+      (click)="setActiveTab('dashboard')"
+    >
+      <ng-icon name="lucideChartBar" class="w-5 h-5"></ng-icon>
+      Dashboard
+    </button>
+
+    <button
+      class="flex flex-1 items-center justify-center text-center mx-auto gap-2 px-4 py-2 rounded-md font-semibold transition-all duration-200"
+      [class]="
+        activeTab() === 'event' ? 'bg-white shadow-sm text-black' : 'text-black hover:bg-gray-200'
+      "
+      (click)="setActiveTab('event')"
+    >
+      <ng-icon name="lucideSettings" class="w-5 h-5"></ng-icon>
+      Gestão do Evento
+    </button>
+
+    <button
+      class="flex flex-1 items-center justify-center gap-2 px-4 py-2 rounded-md font-semibold transition-all duration-200"
+      [class]="
+        activeTab() === 'participants'
+          ? 'bg-white shadow-sm text-black'
+          : 'text-black hover:bg-gray-200'
+      "
+      (click)="setActiveTab('participants')"
+    >
+      <ng-icon name="lucideUsers" class="w-5 h-5"></ng-icon>
+      Gestão de Participantes
+    </button>
+  </div>
+
+  <div>
+    @if (activeTab() === 'dashboard') {
+    <app-event-analytics />
+    } @if (activeTab() === 'event') {
+    <app-event-managemant />
+    } @if (activeTab() === 'participants') {
+    <app-event-participant />
+    }
+  </div>
+</main>

@@ -50,3 +50,7 @@ textarea {
   border-color: var(--input);
   outline: none;
 }
+
+.badge-draft {
+  @apply bg-gray-100 text-gray-700 border border-gray-300;
+}

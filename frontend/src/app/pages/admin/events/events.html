@@ -21,7 +21,7 @@
       [status]="event.status"
       [eventDate]="getEventDate(event)"
       [location]="event.location"
-      (view)="onViewEvent()"
+      (view)="onViewEvent(event)"
     />
     } @empty {
     <div class="col-span-full text-center py-8">

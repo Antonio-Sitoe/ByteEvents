@@ -19,4 +19,8 @@ export class EventsService {
   createEvent(body: ICreateEventData): Observable<IEventData> {
     return this.http.post<IEventData>(this.url, body);
   }
+
+  getEventById(id: string): Observable<IEventData> {
+    return this.http.get<IEventData>(`${this.url}/${id}`);
+  }
 }

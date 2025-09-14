@@ -3,9 +3,10 @@ import { EventCard } from '@/shared/components/event-card/event-card';
 import { IEventData } from '@/core/@types/events';
 import { EventsService } from '@/core/http/events';
 import { NgIconComponent } from '@ng-icons/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ZardDialogService } from '@/shared/components/dialog/dialog.service';
 import { CreateEvent } from '@/shared/components/modals/create-event/create-event';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -15,6 +16,7 @@ import { CreateEvent } from '@/shared/components/modals/create-event/create-even
 export class Events implements OnInit {
   isLoading = false;
   events: IEventData[] = [];
+  router = inject(Router);
 
   constructor(private eventsService: EventsService, private dialogService: ZardDialogService) {}
 
@@ -58,8 +60,9 @@ export class Events implements OnInit {
     });
   }
 
-  onViewEvent() {
+  onViewEvent(event: IEventData) {
     console.log('Ver detalhes do evento');
+    this.router.navigate(['/dashboard', event.id]);
   }
 
   getEventDate(event: IEventData): Date {

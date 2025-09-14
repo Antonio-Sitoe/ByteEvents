@@ -15,7 +15,13 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { BasePortalOutlet, CdkPortalOutlet, ComponentPortal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import {
+  BasePortalOutlet,
+  CdkPortalOutlet,
+  ComponentPortal,
+  PortalModule,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { filter, fromEvent, takeUntil } from 'rxjs';
 
@@ -66,7 +72,9 @@ export class ZardDialogComponent<T> extends BasePortalOutlet {
   private readonly overlayRef = inject(OverlayRef);
   protected readonly config = inject(ZardDialogOptions<T>);
 
-  protected readonly classes = computed(() => mergeClasses(dialogVariants(), this.config.zCustomClasses));
+  protected readonly classes = computed(() =>
+    mergeClasses(dialogVariants(), this.config.zCustomClasses)
+  );
   public dialogRef?: ZardDialogRef<T>;
 
   protected readonly isStringContent = typeof this.config.zContent === 'string';
@@ -110,13 +118,14 @@ export class ZardDialogComponent<T> extends BasePortalOutlet {
 
   overlayClickOutside() {
     return fromEvent<MouseEvent>(document, 'click').pipe(
-      filter(event => {
+      filter((event) => {
         const clickTarget = event.target as HTMLElement;
         const hasNotOrigin = clickTarget !== this.host.nativeElement;
-        const hasNotOverlay = !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) === false;
+        const hasNotOverlay =
+          !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) === false;
         return hasNotOrigin && hasNotOverlay;
       }),
-      takeUntil(this.overlayRef.detachments()),
+      takeUntil(this.overlayRef.detachments())
     );
   }
 }
