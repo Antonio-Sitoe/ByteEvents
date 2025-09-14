@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './event-participant.html',
 })
-export class EventParticipant {}
+export class EventParticipant {
+  openAddParticipantModal() {
+    console.log('Abrir modal para adicionar participante');
+  }
+}
