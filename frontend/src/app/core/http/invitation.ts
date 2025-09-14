@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { http } from './api';
 import { Observable } from 'rxjs';
-import { ConfirmPresenceResponse, IParticipantResponse } from '../@types/invitation';
+import {
+  ConfirmPresenceResponse,
+  IEventStaticsResponse,
+  IParticipantResponse,
+} from '../@types/invitation';
 
 export interface SendEmailData {
   emails: string[];
@@ -36,5 +40,9 @@ export class InvitationService {
       `${this.url}/events/${body.eventId}/accept?token=${body.token}`,
       {}
     );
+  }
+
+  getStatics(eventId: string): Observable<IEventStaticsResponse> {
+    return this.http.get<IEventStaticsResponse>(`${this.url}/events/${eventId}/invitations/stats`);
   }
 }

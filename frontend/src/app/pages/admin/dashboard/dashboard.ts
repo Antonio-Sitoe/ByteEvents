@@ -20,7 +20,7 @@ export class Dashboard implements OnInit {
   event: IEventData | null = null;
   eventId = inject(ActivatedRoute).snapshot.params['id'];
   isLoading = false;
-  activeTab = signal<Tab>('participants');
+  activeTab = signal<Tab>('dashboard');
 
   ngOnInit(): void {
     if (this.eventId) {

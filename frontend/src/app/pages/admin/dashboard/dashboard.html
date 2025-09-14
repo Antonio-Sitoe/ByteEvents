@@ -41,7 +41,7 @@
 
   <div>
     @if (activeTab() === 'dashboard') {
-    <app-event-analytics />
+    <app-event-analytics [eventId]="eventId" />
     } @if (activeTab() === 'event') {
     <app-event-managemant />
     } @if (activeTab() === 'participants') {

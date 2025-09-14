@@ -26,3 +26,13 @@ export interface ConfirmPresenceResponse {
   message: string;
   data: Invitation;
 }
+
+export interface IEventStaticsResponse {
+  message: string;
+  data: {
+    total: number;
+    pending: number;
+    accepted: number;
+    declined: number;
+  };
+}

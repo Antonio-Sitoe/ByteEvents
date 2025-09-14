@@ -1,1 +1,5 @@
-<p>event-analytics works!</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+  <app-registered-participant [eventId]="eventId" />
+  <app-invitations-sent [eventId]="eventId" />
+  <app-speacker-dash [eventId]="eventId" />
+</div>
