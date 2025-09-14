@@ -1,0 +1,103 @@
+<div class="space-y-6 bg-white w-full">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <z-form-field>
+        <label z-form-label zRequired for="name">Nome</label>
+        <z-form-control [errorMessage]="isFieldInvalid('name') ? 'Digite o nome do contacto' : ''">
+          <input
+            z-input
+            id="name"
+            type="text"
+            placeholder="Nome completo"
+            formControlName="name"
+            class="input placeholder:text-gray-400"
+          />
+        </z-form-control>
+      </z-form-field>
+
+      <z-form-field>
+        <label z-form-label zRequired for="email">Email</label>
+        <z-form-control [errorMessage]="isFieldInvalid('email') ? 'Digite um email válido' : ''">
+          <input
+            z-input
+            id="email"
+            type="email"
+            placeholder="email@exemplo.com"
+            formControlName="email"
+            class="input placeholder:text-gray-400"
+          />
+        </z-form-control>
+      </z-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4">
+      <z-form-field>
+        <label z-form-label for="phone">Telefone</label>
+        <z-form-control>
+          <input
+            z-input
+            id="phone"
+            type="tel"
+            placeholder="+258 878984956"
+            formControlName="phone"
+            class="input placeholder:text-gray-400"
+          />
+        </z-form-control>
+      </z-form-field>
+    </div>
+
+    <z-form-field>
+      <label z-form-label for="tags">Tags</label>
+      <z-form-control>
+        <div class="space-y-2">
+          <div class="flex gap-2">
+            <input
+              z-input
+              id="tags"
+              type="text"
+              placeholder="Adicionar tag (pressione Enter)"
+              formControlName="newTag"
+              (keypress)="handleKeyPress($event)"
+              class="input flex-1 placeholder:text-gray-400"
+            />
+            <button type="button" (click)="addTag()" z-button zType="outline" class="btn">
+              Adicionar
+            </button>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            @for (tag of tags(); track tag) {
+            <div class="badge badge-ghost flex items-center gap-1">
+              {{ tag }}
+              <ng-icon
+                name="lucideX"
+                class="h-3 w-3 cursor-pointer"
+                (click)="removeTag(tag)"
+              ></ng-icon>
+            </div>
+            }
+          </div>
+        </div>
+      </z-form-control>
+    </z-form-field>
+
+    <div class="flex gap-2">
+      <button class="rounded-md btn" z-button zType="outline" type="submit">
+        {{ isSubmitting() ? 'Guardando...' : (contact ? 'Atualizar' : 'Adicionar') + ' Contacto' }}
+      </button>
+      <button z-button zType="outline" type="button" (click)="resetForm()">Limpar</button>
+    </div>
+
+    @if (showSuccess()) {
+    <div class="p-4 bg-green-50 border border-green-200 rounded-md">
+      <z-form-message zType="success"
+        >✓ Contacto {{ contact ? 'atualizado' : 'adicionado' }} com sucesso</z-form-message
+      >
+    </div>
+    } @if (errorMessage()) {
+    <div class="p-4 bg-red-50 border border-red-200 rounded-md">
+      <z-form-message zType="error">{{ errorMessage() }}</z-form-message>
+    </div>
+    }
+  </form>
+</div>

@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ISpeaker } from '@/core/@types/speakers';
-import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CreateSpeackers } from '@/shared/components/modals/create-speackers/create-speackers';
 import { SpeakersService } from '@/core/http/speackers';
@@ -9,7 +8,7 @@ import { ZardDialogService } from '@/shared/components/dialog/dialog.service';
 import { ZardAlertDialogService } from '@/shared/components/alert-dialog/alert-dialog.service';
 @Component({
   selector: 'app-event-managemant',
-  imports: [NgIconComponent, DatePipe],
+  imports: [NgIconComponent],
   templateUrl: './event-managemant.html',
 })
 export class EventManagemant implements OnInit {

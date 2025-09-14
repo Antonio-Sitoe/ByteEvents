@@ -1,0 +1,1 @@
+ALTER TABLE "speakers" ALTER COLUMN "startTime" SET DATA TYPE text;

@@ -1,4 +1,11 @@
-import { pgTable, uuid, text, timestamp, json } from 'drizzle-orm/pg-core'
+import {
+  pgTable,
+  uuid,
+  text,
+  timestamp,
+  json,
+  boolean,
+} from 'drizzle-orm/pg-core'
 
 export const contacts = pgTable('contacts', {
   id: uuid().primaryKey().defaultRandom(),
@@ -6,6 +13,7 @@ export const contacts = pgTable('contacts', {
   email: text('email').notNull().unique(),
   phone: text('phone'),
   tags: json('tags').default([]),
+  is_deleted: boolean('is_deleted').notNull().default(false),
   created_at: timestamp('created_at').notNull().defaultNow(),
   updated_at: timestamp('updated_at').notNull().defaultNow(),
 })

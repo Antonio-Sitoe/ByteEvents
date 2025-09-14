@@ -26,6 +26,10 @@ import {
   lucidePencil,
   lucideTrash2,
   lucideClock,
+  lucideMessageCircle,
+  lucideMail,
+  lucideSearch,
+  lucideTrash,
 } from '@ng-icons/lucide';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -59,6 +63,10 @@ export const appConfig: ApplicationConfig = {
       lucidePencil,
       lucideTrash2,
       lucideClock,
+      lucideMessageCircle,
+      lucideMail,
+      lucideSearch,
+      lucideTrash,
     }),
     { provide: LOCALE_ID, useValue: 'pt' },
   ],

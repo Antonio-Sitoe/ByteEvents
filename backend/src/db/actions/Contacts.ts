@@ -1,5 +1,5 @@
 import { db } from '../db'
-import { asc, eq, ilike, or } from 'drizzle-orm'
+import { asc, desc, eq, ilike, or } from 'drizzle-orm'
 import { contacts } from '../schemas'
 import type { IContactData } from '../schemas/contacts'
 
@@ -21,33 +21,58 @@ export class ContactModel {
   }
 
   async findById(id: string): Promise<IContactData | undefined> {
-    const [row] = await db.select().from(contacts).where(eq(contacts.id, id)).limit(1)
+    const [row] = await db
+      .select()
+      .from(contacts)
+      .where(eq(contacts.id, id))
+      .limit(1)
     return row ?? undefined
   }
 
   async findByEmail(email: string): Promise<IContactData | undefined> {
-    const [row] = await db.select().from(contacts).where(eq(contacts.email, email)).limit(1)
+    const [row] = await db
+      .select()
+      .from(contacts)
+      .where(eq(contacts.email, email))
+      .limit(1)
     return row ?? undefined
   }
 
-  async findAll(): Promise<IContactData[]> {
-    const rows = await db.select().from(contacts).orderBy(asc(contacts.name))
-    return rows
-  }
+  async findAll(options?: {
+    search?: string
+    orderBy?: 'name' | 'created_at'
+  }): Promise<IContactData[]> {
+    const baseQuery = db.select().from(contacts)
 
-  async search(query: string): Promise<IContactData[]> {
-    const like = `%${query}%`
-    const rows = await db
-      .select()
-      .from(contacts)
-      .where(or(ilike(contacts.name, like), ilike(contacts.email, like)))
-      .orderBy(asc(contacts.name))
+    if (options?.search) {
+      const like = `%${options.search}%`
+      const searchQuery = baseQuery.where(
+        or(ilike(contacts.name, like), ilike(contacts.email, like))
+      )
+
+      const orderBy = options?.orderBy || 'created_at'
+      if (orderBy === 'name') {
+        const rows = await searchQuery.orderBy(asc(contacts.name))
+        return rows
+      }
+      const rows = await searchQuery.orderBy(desc(contacts.created_at))
+      return rows
+    }
+
+    const orderBy = options?.orderBy || 'created_at'
+    if (orderBy === 'name') {
+      const rows = await baseQuery.orderBy(asc(contacts.name))
+      return rows
+    }
+    const rows = await baseQuery
+      .orderBy(desc(contacts.created_at))
+      .where(eq(contacts.is_deleted, false))
     return rows
   }
 
   async update(
     id: string,
-    contactData: Partial<{ name: string; email: string; phone?: string }>,
+    contactData: Partial<{ name: string; email: string; phone?: string }>
   ): Promise<IContactData | undefined> {
     const changes: Partial<typeof contacts.$inferInsert> = {
       updated_at: new Date(),
@@ -61,7 +86,11 @@ export class ContactModel {
   }
 
   async delete(id: string): Promise<{ changes: number }> {
-    const deleted = await db.delete(contacts).where(eq(contacts.id, id)).returning()
+    const deleted = await db
+      .update(contacts)
+      .set({ is_deleted: true })
+      .where(eq(contacts.id, id))
+      .returning()
     return { changes: deleted.length }
   }
 }

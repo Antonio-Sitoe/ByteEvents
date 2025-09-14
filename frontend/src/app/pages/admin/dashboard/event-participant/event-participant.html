@@ -1,4 +1,119 @@
-<div class="p-6 bg-white rounded-lg">
-  <h2 class="text-xl font-bold mb-4">Gestão de Participantes</h2>
-  <p>Conteúdo da gestão de participantes</p>
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-xl font-bold">Gestão de Participantes</h2>
+      <p class="text-sm text-gray-500 mt-2">Gerencie sua lista de contactos e envie convites</p>
+    </div>
+
+    <button
+      [disabled]="selectedContacts().length === 0"
+      class="btn rounded-md bg-gray-950"
+      (click)="openSendEmailsModal()"
+    >
+      <ng-icon name="lucideMail" class="w-5 h-5"></ng-icon>
+      Enviar Convintes ({{ selectedContacts().length }})
+    </button>
+  </div>
+  <div class="card bg-white shadow-lg">
+    <div class="card-body">
+      <section class="flex items-center justify-between">
+        <div class="flex items-center gap-2 mb-4">
+          <ng-icon name="lucideUsers" class="h-5 w-5"></ng-icon>
+          <h3 class="card-title">Selecionar Contactos para Convite ou adicione novos contactos</h3>
+        </div>
+        <div>
+          <button class="btn rounded-md bg-gray-950" (click)="openAddParticipantModal()">
+            <ng-icon name="lucidePlus" class="w-5 h-5"></ng-icon>
+            Adicionar Contacto
+          </button>
+        </div>
+      </section>
+
+      <div class="space-y-4">
+        <div class="flex gap-4">
+          <div class="flex-1 relative">
+            <ng-icon
+              name="lucideSearch"
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-black"
+            ></ng-icon>
+            <input
+              type="text"
+              placeholder="Pesquisar contactos..."
+              [(ngModel)]="searchTerm"
+              class="input pl-10 w-full placeholder:text-gray-300"
+            />
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2 pb-2 border-b">
+          <app-modern-checkbox
+            class="text-sm font-medium"
+            [checked]="selectAllChecked"
+            (checkedChange)="handleSelectAll($event)"
+          >
+            Selecionar todos ({{ filteredContacts.length }} contactos)
+          </app-modern-checkbox>
+        </div>
+
+        <div class="space-y-2 max-h-96 overflow-y-auto">
+          @for (contact of filteredContacts; track contact.id) {
+          <div
+            class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50"
+          >
+            <app-modern-checkbox
+              [checked]="isContactSelected(contact.id)"
+              (checkedChange)="handleSelectContact(contact, $event)"
+            ></app-modern-checkbox>
+
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="flex flex-col gap-1">
+                  <div>
+                    <h3 class="font-medium">{{ contact.name }}</h3>
+                    <p class="text-sm text-gray-500">{{ contact.email }}</p>
+                  </div>
+
+                  <div class="flex gap-1">
+                    @for (tag of contact.tags; track tag) {
+                    <div class="badge badge-draft text-xs">{{ tag }}</div>
+                    }
+                  </div>
+                </div>
+                <div class="flex gap-1 items-center">
+                  <button
+                    z-button
+                    zType="outline"
+                    zSize="sm"
+                    class="flex items-center gap-1"
+                    (click)="handleEdit(contact)"
+                  >
+                    <ng-icon name="lucidePencil" class="h-3 w-3" />
+                    Editar
+                  </button>
+
+                  <button
+                    z-button
+                    zType="outline"
+                    zSize="sm"
+                    (click)="handleDelete(contact)"
+                    class="flex items-center text-red-700 gap-1 text-destructive hover:text-destructive bg-transparent"
+                  >
+                    <ng-icon name="lucideTrash" class="h-3 w-3" />
+                    Remover
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+
+        @if (filteredContacts.length === 0) {
+        <div class="text-center py-8 text-gray-500">
+          <p>Nenhum contacto encontrado.</p>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
 </div>
