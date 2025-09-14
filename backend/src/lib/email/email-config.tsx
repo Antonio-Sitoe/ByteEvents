@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer'
 import { render } from '@react-email/render'
 import { env } from '@/lib/env'
-import { EmailJobData } from '@/@types/invitations-job'
+import type { EmailJobData } from '@/@types/invitations-job'
 import ByteEventsInviteEmail from './email-template'
 
 export const transporter = nodemailer.createTransport({

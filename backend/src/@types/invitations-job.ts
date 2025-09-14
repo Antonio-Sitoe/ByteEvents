@@ -4,5 +4,5 @@ export interface EmailJobData {
   subject: string
   username: string
   eventTitle: string
-  ticket?: string
+  token?: string
 }

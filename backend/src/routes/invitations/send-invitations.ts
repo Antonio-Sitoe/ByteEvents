@@ -9,7 +9,7 @@ import { invitationModel } from '@/db/actions/Invitations'
 import { eventModel } from '@/db/actions/events'
 import { contactModel } from '@/db/actions/Contacts'
 import { v4 as uuidv4 } from 'uuid'
-import { ICreateInvitationData } from '@/db/schemas'
+import type { ICreateInvitationData } from '@/db/schemas'
 
 export async function sendInvitationsRoute(fastify: FastifyInstance) {
   fastify.post(

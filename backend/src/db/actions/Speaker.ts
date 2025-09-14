@@ -1,7 +1,10 @@
-import { eq } from 'drizzle-orm'
 import { db } from '@/db/db'
+import { desc, eq } from 'drizzle-orm'
 import { speakers } from '@/db/schemas/speakers'
-import type { CreateSpeakerData, UpdateSpeakerData } from '@/utils/schemas/speakers'
+import type {
+  CreateSpeakerData,
+  UpdateSpeakerData,
+} from '@/utils/schemas/speakers'
 
 export class SpeakerModel {
   async create(speakerData: CreateSpeakerData) {
@@ -11,7 +14,7 @@ export class SpeakerModel {
         name: speakerData.name,
         topic: speakerData.topic,
         bio: speakerData.bio,
-        startTime: new Date(speakerData.startTime),
+        startTime: speakerData.startTime,
         duration: speakerData.duration,
         eventId: speakerData.eventId,
         created_at: new Date(),
@@ -23,7 +26,11 @@ export class SpeakerModel {
   }
 
   async findById(id: string) {
-    const [speaker] = await db.select().from(speakers).where(eq(speakers.id, id)).limit(1)
+    const [speaker] = await db
+      .select()
+      .from(speakers)
+      .where(eq(speakers.id, id))
+      .limit(1)
     return speaker
   }
 
@@ -32,7 +39,7 @@ export class SpeakerModel {
       .select()
       .from(speakers)
       .where(eq(speakers.eventId, eventId))
-      .orderBy(speakers.name)
+      .orderBy(desc(speakers.created_at))
 
     return speakerList
   }
@@ -43,9 +50,12 @@ export class SpeakerModel {
     if (speakerData.name !== undefined) updateData.name = speakerData.name
     if (speakerData.topic !== undefined) updateData.topic = speakerData.topic
     if (speakerData.bio !== undefined) updateData.bio = speakerData.bio
-    if (speakerData.startTime !== undefined) updateData.startTime = speakerData.startTime
-    if (speakerData.duration !== undefined) updateData.duration = speakerData.duration
-    if (speakerData.eventId !== undefined) updateData.eventId = speakerData.eventId
+    if (speakerData.startTime !== undefined)
+      updateData.startTime = speakerData.startTime
+    if (speakerData.duration !== undefined)
+      updateData.duration = speakerData.duration
+    if (speakerData.eventId !== undefined)
+      updateData.eventId = speakerData.eventId
 
     const [updatedSpeaker] = await db
       .update(speakers)
@@ -60,7 +70,10 @@ export class SpeakerModel {
   }
 
   async delete(id: string) {
-    const [deletedSpeaker] = await db.delete(speakers).where(eq(speakers.id, id)).returning()
+    const [deletedSpeaker] = await db
+      .delete(speakers)
+      .where(eq(speakers.id, id))
+      .returning()
 
     return deletedSpeaker
   }

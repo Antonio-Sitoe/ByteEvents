@@ -1,7 +1,10 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 
-import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
+import {
+  serializerCompiler,
+  validatorCompiler,
+} from 'fastify-type-provider-zod'
 
 import { env } from './lib/env'
 import { healthRoutes } from './routes/health'
@@ -11,6 +14,7 @@ import { speakerRoutes } from './routes/speakers'
 import { contactsRoutes } from './routes/contacts'
 import { invitationRoutes } from './routes/invitations'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
+import { authRoutes } from './routes/auth'
 
 const app = Fastify()
   .withTypeProvider<ZodTypeProvider>()
@@ -22,7 +26,7 @@ const app = Fastify()
   })
   .register(swaggerConfig)
   .register(healthRoutes)
-  // app.register(authRoutes)
+  .register(authRoutes)
   .register(eventsRoutes)
   .register(speakerRoutes)
   .register(contactsRoutes)

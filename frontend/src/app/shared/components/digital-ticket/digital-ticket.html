@@ -1,0 +1,23 @@
+<div
+  class="max-w-md mx-auto bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg shadow-lg"
+>
+  <div class="p-6 space-y-6">
+    <div class="flex justify-center">
+      <div class="bg-white p-4 rounded-lg border-2 border-dashed border-gray-300">
+        <div class="w-32 h-32 bg-gray-100 rounded flex items-center justify-center">
+          <div class="text-center">
+            <qr-code [value]="qrCode" size="100" errorCorrectionLevel="M" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-xs text-gray-500 text-center bg-white/30 rounded p-3">
+      <p class="font-medium mb-1">Instruções:</p>
+      <p>
+        Apresente este bilhete digital na entrada do evento. O código QR será verificado para
+        confirmar a sua presença.
+      </p>
+    </div>
+  </div>
+</div>

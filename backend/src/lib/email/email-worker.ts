@@ -1,17 +1,15 @@
-import { Worker } from 'bullmq'
-
 import { env } from '@/lib/env'
+import { Worker } from 'bullmq'
 import { sendEmail } from './email-config'
 import { emailConnection } from './email-conection'
-import { EmailJobData } from '@/@types/invitations-job'
+import type { EmailJobData } from '@/@types/invitations-job'
 
 const worker = new Worker(
   'emailQueue',
   async (job) => {
-    const { email, subject, ticket, username, eventTitle } =
+    const { email, subject, token, username, eventTitle } =
       job.data as EmailJobData
-    console.log('Dados do job:', job.data)
-    console.log(`Processando job: ${job.id} para o e-mail: ${email}`)
+    console.log(job.data)
     try {
       const sendData = {
         email,
@@ -20,7 +18,7 @@ const worker = new Worker(
         invitedByUsername: 'ByteEvents Team',
         invitedByEmail: 'team@byteevents.com',
         eventName: eventTitle,
-        inviteLink: `${env.FRONTEND_URL}/event/${ticket}?email=${email}`,
+        inviteLink: `${env.FRONTEND_URL}/sign-in?token=${token}`,
       }
       console.log('Dados para envio de e-mail:', sendData)
       await sendEmail(sendData)

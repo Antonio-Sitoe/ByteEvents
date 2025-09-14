@@ -2,7 +2,10 @@ import { eventModel } from '@/db/actions/events'
 import { speakerModel } from '@/db/actions/Speaker'
 import type { FastifyInstance } from 'fastify'
 
-import { CreateSpeakerSchema, type CreateSpeakerData } from '@/utils/schemas/speakers'
+import {
+  CreateSpeakerSchema,
+  type CreateSpeakerData,
+} from '@/utils/schemas/speakers'
 
 export async function createSpeakerRoute(fastify: FastifyInstance) {
   fastify.post<{ Body: CreateSpeakerData }>(
@@ -19,7 +22,9 @@ export async function createSpeakerRoute(fastify: FastifyInstance) {
         if (!event) {
           return reply.code(404).send({ error: 'Event not found' })
         }
+        console.log('Associated event:', speakerData)
         const speaker = await speakerModel.create(speakerData)
+
         if (!speaker) {
           return reply.code(500).send({ error: 'Failed to create speaker' })
         }
@@ -34,6 +39,6 @@ export async function createSpeakerRoute(fastify: FastifyInstance) {
           message: JSON.stringify(error),
         })
       }
-    },
+    }
   )
 }

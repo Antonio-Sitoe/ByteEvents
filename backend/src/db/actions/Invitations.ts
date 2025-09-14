@@ -36,6 +36,20 @@ export class InvitationModel {
     return updated || null
   }
 
+  async findByToken(token: string) {
+    const result = await db
+      .select({
+        invitation: invitations,
+        contact: contacts,
+      })
+      .from(invitations)
+      .leftJoin(contacts, eq(invitations.email, contacts.email))
+      .where(eq(invitations.token, token))
+      .orderBy(invitations.createdAt)
+
+    return result
+  }
+
   async findByEvent(eventId: string) {
     const result = await db
       .select({

@@ -29,6 +29,20 @@
       "when": 1757526754844,
       "tag": "0003_last_glorian",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1757847747834,
+      "tag": "0004_tan_salo",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1757861360182,
+      "tag": "0005_curious_exiles",
+      "breakpoints": true
     }
   ]
 }

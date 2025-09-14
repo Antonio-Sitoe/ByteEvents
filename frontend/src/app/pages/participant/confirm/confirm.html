@@ -1,0 +1,39 @@
+<div class="text-center space-y-2 mt-10">
+  <h1 class="text-3xl font-bold text-muted-foreground">Bem-vindo, {{ name() }}!</h1>
+  <p class="text-muted-foreground text-sm">Aqui estão os detalhes do seu evento</p>
+</div>
+
+<main>
+  <div class="container max-w-4xl mx-auto px-4 py-4">
+    @if(status() === 'pending') {
+    <div class="mb-6 border border-gray-200 bg-gray-50 rounded-lg">
+      <div class="p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-semibold text-gray-900">Confirme a sua participação</h3>
+            <p class="text-sm text-gray-700">
+              Clique no botão para confirmar e acessar o seu bilhete digital
+            </p>
+          </div>
+          <button
+            (click)="handleConfirmParticipation()"
+            class="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            Confirmar e Acessar Bilhete
+          </button>
+        </div>
+      </div>
+    </div>
+    } @if(status() === 'accepted') {
+    <app-digital-ticket [qrCode]="qrCode()" />
+    }
+  </div>
+</main>
