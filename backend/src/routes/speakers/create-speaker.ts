@@ -14,6 +14,7 @@ export async function createSpeakerRoute(fastify: FastifyInstance) {
       schema: {
         body: CreateSpeakerSchema,
       },
+      preHandler: fastify.authenticate,
     },
     async (request, reply) => {
       try {

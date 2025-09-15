@@ -1,7 +1,10 @@
 import type { FastifyInstance } from 'fastify'
 import { speakerModel } from '@/db/actions/Speaker'
 import { eventModel } from '@/db/actions/events'
-import { SpeakerParamsSchema, type SpeakerParams } from '@/utils/schemas/speakers'
+import {
+  SpeakerParamsSchema,
+  type SpeakerParams,
+} from '@/utils/schemas/speakers'
 
 export async function deleteSpeakerRoute(fastify: FastifyInstance) {
   fastify.delete<{ Params: SpeakerParams }>(
@@ -10,6 +13,7 @@ export async function deleteSpeakerRoute(fastify: FastifyInstance) {
       schema: {
         params: SpeakerParamsSchema,
       },
+      preHandler: fastify.authenticate,
     },
     async (request, reply) => {
       try {
@@ -21,7 +25,9 @@ export async function deleteSpeakerRoute(fastify: FastifyInstance) {
         }
 
         if (!existingSpeaker.eventId) {
-          return reply.code(404).send({ error: 'Speaker has no associated event' })
+          return reply
+            .code(404)
+            .send({ error: 'Speaker has no associated event' })
         }
 
         const event = await eventModel.findById(existingSpeaker.eventId)
@@ -36,8 +42,10 @@ export async function deleteSpeakerRoute(fastify: FastifyInstance) {
         })
       } catch (error) {
         fastify.log.error(error)
-        return reply.code(500).send({ error: 'Internal server error, failed to delete speaker' })
+        return reply
+          .code(500)
+          .send({ error: 'Internal server error, failed to delete speaker' })
       }
-    },
+    }
   )
 }

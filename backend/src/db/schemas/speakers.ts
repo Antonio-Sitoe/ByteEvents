@@ -6,7 +6,7 @@ export const speakers = pgTable('speakers', {
   name: text().notNull(),
   topic: text().notNull(),
   bio: text(),
-  startTime: timestamp().notNull(),
+  startTime: text().notNull(),
   duration: integer().notNull().default(60),
   eventId: uuid().references(() => events.id),
   created_at: timestamp().notNull().defaultNow(),

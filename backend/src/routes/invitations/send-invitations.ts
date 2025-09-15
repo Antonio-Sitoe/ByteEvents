@@ -19,6 +19,7 @@ export async function sendInvitationsRoute(fastify: FastifyInstance) {
         params: invitationParamsSchema,
         body: sendInvitationsSchema,
       },
+      preHandler: fastify.authenticate,
     },
     async (request, reply) => {
       try {

@@ -10,6 +10,7 @@ export async function getSpeakersByEventRoute(fastify: FastifyInstance) {
       schema: {
         params: EventParamsSchema,
       },
+      preHandler: fastify.authenticate,
     },
     async (request, reply) => {
       try {
@@ -26,6 +27,6 @@ export async function getSpeakersByEventRoute(fastify: FastifyInstance) {
           error: 'Internal server error, failed to get speakers by event',
         })
       }
-    },
+    }
   )
 }

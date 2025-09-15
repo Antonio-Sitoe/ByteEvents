@@ -1,6 +1,9 @@
 import type { FastifyInstance } from 'fastify'
 import { speakerModel } from '@/db/actions/Speaker'
-import { SpeakerParamsSchema, type SpeakerParams } from '@/utils/schemas/speakers'
+import {
+  SpeakerParamsSchema,
+  type SpeakerParams,
+} from '@/utils/schemas/speakers'
 
 export async function getSpeakerByIdRoute(fastify: FastifyInstance) {
   fastify.get<{ Params: SpeakerParams }>(
@@ -9,6 +12,7 @@ export async function getSpeakerByIdRoute(fastify: FastifyInstance) {
       schema: {
         params: SpeakerParamsSchema,
       },
+      preHandler: fastify.authenticate,
     },
     async (request, reply) => {
       try {
@@ -20,7 +24,9 @@ export async function getSpeakerByIdRoute(fastify: FastifyInstance) {
         }
 
         if (!speaker.eventId) {
-          return reply.code(404).send({ error: 'Speaker has no associated event' })
+          return reply
+            .code(404)
+            .send({ error: 'Speaker has no associated event' })
         }
 
         return reply.send({ speaker })
@@ -28,6 +34,6 @@ export async function getSpeakerByIdRoute(fastify: FastifyInstance) {
         fastify.log.error(error)
         return reply.code(500).send({ error: 'Internal server error' })
       }
-    },
+    }
   )
 }

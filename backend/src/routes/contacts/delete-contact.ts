@@ -4,6 +4,9 @@ import { contactModel } from '@/db/actions/Contacts'
 export async function deleteContactRoute(fastify: FastifyInstance) {
   fastify.delete<{ Params: { id: string } }>(
     '/contacts/:id',
+    {
+      preHandler: fastify.authenticate,
+    },
     async (request, reply) => {
       try {
         const contactId = request?.params?.id

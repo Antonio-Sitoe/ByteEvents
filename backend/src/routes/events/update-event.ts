@@ -8,7 +8,9 @@ export async function updateEvent(fastify: FastifyInstance): Promise<void> {
     Body: Partial<IEventData>
   }>(
     '/events/:id',
-
+    {
+      preHandler: fastify.authenticate,
+    },
     async (request, reply) => {
       try {
         const eventId = request.params.id as string
@@ -32,6 +34,6 @@ export async function updateEvent(fastify: FastifyInstance): Promise<void> {
         fastify.log.error(error)
         return reply.code(500).send({ error: 'Internal server error' })
       }
-    },
+    }
   )
 }

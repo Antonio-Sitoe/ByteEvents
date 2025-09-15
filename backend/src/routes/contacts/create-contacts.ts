@@ -8,6 +8,7 @@ export async function createContactRoute(fastify: FastifyInstance) {
     '/contacts',
     {
       schema: { body: contactSchema },
+      preHandler: fastify.authenticate,
     },
     async (request, reply) => {
       const { name, email, phone, tags } = request.body
@@ -20,7 +21,9 @@ export async function createContactRoute(fastify: FastifyInstance) {
 
       const existingContact = await contactModel.findByEmail(contactData.email)
       if (existingContact) {
-        return reply.code(400).send({ error: 'Contact already exists with this email' })
+        return reply
+          .code(400)
+          .send({ error: 'Contact already exists with this email' })
       }
 
       const contact = await contactModel.create(contactData)
@@ -28,7 +31,9 @@ export async function createContactRoute(fastify: FastifyInstance) {
         return reply.code(500).send({ error: 'Failed to create contact' })
       }
 
-      return reply.code(201).send({ message: 'Contact created successfully', contact })
-    },
+      return reply
+        .code(201)
+        .send({ message: 'Contact created successfully', contact })
+    }
   )
 }

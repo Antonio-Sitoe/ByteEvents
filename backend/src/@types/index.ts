@@ -28,7 +28,7 @@ export interface UserResponse {
   name: string
   email: string
   role: string
-  created_at: Date
+  created_at: string
 }
 
 export interface JWTPayload {

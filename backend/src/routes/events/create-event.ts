@@ -11,6 +11,7 @@ export async function createEvent(app: FastifyInstance) {
       schema: {
         body: createEventSchema,
       },
+      preHandler: app.authenticate,
     },
     async (request, reply) => {
       try {
