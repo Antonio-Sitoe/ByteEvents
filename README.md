@@ -114,13 +114,13 @@ ByteEvents/
 
 ### Desenvolvimento
 
-- Backend: `npm run dev`
+- Backend: `npm run dev && npm run worker`
 - Frontend: `npm start`
 - Banco: `docker-compose up -d`
 
 ### Produção
 
-- Backend: `npm run build && npm start`
+- Backend: `npm run build && npm start && npm run worker`
 - Frontend: `npm run build`
 - Banco: Docker containers
 
