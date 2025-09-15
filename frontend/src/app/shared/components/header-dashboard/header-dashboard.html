@@ -21,12 +21,8 @@
         <div class="badge" [ngClass]="badgeColor()">
           {{ getStatusLabel() }}
         </div>
-        <button
-          class="btn btn-ghost btn-sm text-red-600 hover:bg-red-50"
-          (click)="onLogout()"
-          title="Sair"
-        >
-          <ng-icon name="lucideLogOut" class="h-4 w-4"></ng-icon>
+        <button variant="outline" (click)="onLogout()" size="sm" class="btn btn-ghost">
+          <ng-icon name="lucideLogOut" class="w-5 h-5"></ng-icon>
         </button>
       </div>
     </div>

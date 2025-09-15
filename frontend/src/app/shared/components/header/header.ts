@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthService } from '@/core/http/auth';
+import { Component, inject } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
@@ -6,4 +7,10 @@ import { NgIconComponent } from '@ng-icons/core';
   imports: [NgIconComponent],
   templateUrl: './header.html',
 })
-export class Header {}
+export class Header {
+  authService = inject(AuthService);
+
+  logout() {
+    this.authService.logout();
+  }
+}

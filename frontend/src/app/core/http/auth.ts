@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   login(credentials: ILoginRequest): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>(`${http}/auth/login`, credentials).pipe(
+    return this.http.post<ILoginResponse>(`${http}/login`, credentials).pipe(
       tap((response) => {
         this.setAuth(response.token, response.user);
       })
