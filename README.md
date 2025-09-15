@@ -1,10 +1,10 @@
-# Arquitetura do Sistema ByteEvents
+# ByteEvents
 
-## 🏗️ Visão Geral
+## Visão Geral
 
 O ByteEvents é uma aplicação full-stack para gestão de eventos, composta por um backend em Node.js/TypeScript e um frontend em Angular.
 
-## 📐 Diagrama de Arquitetura
+## Diagrama de Arquitetura
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -21,7 +21,7 @@ O ByteEvents é uma aplicação full-stack para gestão de eventos, composta por
                        └─────────────────┘
 ```
 
-## 🔧 Componentes Principais
+## Componentes Principais
 
 ### Frontend (Angular)
 
@@ -63,7 +63,7 @@ O ByteEvents é uma aplicação full-stack para gestão de eventos, composta por
 - **Porta:** 6379
 - **Uso:** Filas de email (BullMQ)
 
-## 🔄 Fluxo de Dados
+## Fluxo de Dados
 
 ### 1. Autenticação
 
@@ -83,7 +83,7 @@ Frontend → Backend API → PostgreSQL → Backend → Frontend
 Backend → Redis Queue → Email Worker → Email Service
 ```
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 ByteEvents/
@@ -103,14 +103,7 @@ ByteEvents/
         └── assets/        # Recursos estáticos
 ```
 
-## 🔐 Segurança
-
-- **Autenticação:** JWT Tokens
-- **CORS:** Configurado para frontend
-- **Validação:** Schemas de validação em todas as rotas
-- **Banco:** Credenciais isoladas por ambiente
-
-## 🚀 Deploy
+## Deploy
 
 ### Desenvolvimento
 
@@ -124,21 +117,14 @@ ByteEvents/
 - Frontend: `npm run build`
 - Banco: Docker containers
 
-## 📊 Monitoramento
+## Monitoramento
 
 - **API Docs:** http://localhost:3333/docs
 - **Health Check:** http://localhost:3333/health
 
-## 🔄 Comunicação
+## Comunicação
 
 - **Frontend ↔ Backend:** HTTP/HTTPS (REST API)
 - **Backend ↔ Banco:** Drizzle ORM
 - **Backend ↔ Redis:** BullMQ
 - **Email Service:** Nodemailer
-
-## 📈 Escalabilidade
-
-- **Horizontal:** Múltiplas instâncias do backend
-- **Cache:** Redis para performance
-- **Banco:** Migrações automáticas
-- **Email:** Sistema de filas assíncrono
