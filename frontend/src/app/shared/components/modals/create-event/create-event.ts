@@ -22,6 +22,7 @@ import {
 import { EventsService } from '@/core/http/events';
 import { ICreateEventData } from '@/core/@types/events';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '@/core/http/auth';
 
 export interface FormData {
   title: string;
@@ -46,6 +47,9 @@ export class CreateEvent {
   readonly showSuccess = signal(false);
   readonly isSubmitting = signal(false);
   readonly errorMessage = signal('');
+  private authService = inject(AuthService);
+
+  user = this.authService.currentUser();
 
   readonly form = this.fb.nonNullable.group(
     {
@@ -107,7 +111,7 @@ export class CreateEvent {
         end_datetime: formData.end_datetime,
         location: formData.location,
         status: 'DRAFT',
-        organizer_id: 'cc47f8bb-4534-4921-a77c-d3b14d251d54',
+        organizer_id: this.user?.id || '',
       };
 
       await firstValueFrom(this.eventsService.createEvent(eventData));
