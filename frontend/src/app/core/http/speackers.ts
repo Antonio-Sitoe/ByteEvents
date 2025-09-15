@@ -12,7 +12,7 @@ interface SpeackerResponse {
   providedIn: 'root',
 })
 export class SpeakersService {
-  private url = http + '/speakers';
+  private url = `${http}/speakers`;
   constructor(private http: HttpClient) {}
 
   findAll(eventId: string): Observable<SpeackerResponse> {

@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { http } from './api';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { http } from './api';
 import { ICreateEventData, IEventData } from '../@types/events';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventsService {
-  private url = http + '/events';
+  private url = `${http}/events`;
+
   constructor(private http: HttpClient) {}
 
   getEvents(): Observable<IEventData[]> {
-    const data = this.http.get<IEventData[]>(this.url);
-    return data;
+    return this.http.get<IEventData[]>(this.url);
   }
 
   createEvent(body: ICreateEventData): Observable<IEventData> {
@@ -22,5 +22,13 @@ export class EventsService {
 
   getEventById(id: string): Observable<IEventData> {
     return this.http.get<IEventData>(`${this.url}/${id}`);
+  }
+
+  updateEvent(id: string, body: Partial<ICreateEventData>): Observable<IEventData> {
+    return this.http.put<IEventData>(`${this.url}/${id}`, body);
+  }
+
+  deleteEvent(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }

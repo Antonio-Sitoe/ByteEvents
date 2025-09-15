@@ -10,7 +10,7 @@
     </div>
     <div class="flex flex-1 items-center justify-center">
       <div class="w-full max-w-md p-10 shadow-sm rounded-2xl">
-        <form class="flex flex-col gap-6">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
           <div class="flex flex-col items-center gap-2 text-center">
             <h1 class="text-2xl font-bold flex items-center gap-4">
               <div
@@ -22,29 +22,60 @@
               Faça login para acessar o painel de gestão
             </p>
           </div>
+
           <div class="grid gap-6">
             <div class="grid gap-3">
-              <Label htmlFor="email">Email</Label>
-              <Input
+              <label for="email" class="text-sm font-medium text-gray-700">Email</label>
+              <input
                 id="email"
                 type="email"
+                formControlName="email"
                 placeholder="johndoe@example.com"
-                required
-                class="input rounded-md bg-gray-100 border border-gray-300 w-full placeholder:text-gray-500"
+                class="input rounded-md bg-gray-100 border border-gray-300 w-full placeholder:text-gray-500 px-3 py-2"
+                [class.border-red-500]="
+                  loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+                "
               />
+              @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+              <span class="text-red-500 text-xs">
+                @if (loginForm.get('email')?.errors?.['required']) { Email é obrigatório } @else if
+                (loginForm.get('email')?.errors?.['email']) { Email inválido }
+              </span>
+              }
             </div>
+
             <div class="grid gap-3">
               <div class="flex items-center">
-                <Label htmlFor="password">Senha</Label>
+                <label for="password" class="text-sm font-medium text-gray-700">Senha</label>
               </div>
-              <Input
+              <input
                 id="password"
                 type="password"
-                required
-                class="input rounded-md bg-gray-100 border border-gray-300 w-full"
+                formControlName="password"
+                class="input rounded-md bg-gray-100 border border-gray-300 w-full px-3 py-2"
+                [class.border-red-500]="
+                  loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+                "
               />
             </div>
-            <Button type="submit" class="btn bg-gray-900 rounded-md"> Entrar </Button>
+
+            @if (errorMessage()) {
+            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+              {{ errorMessage() }}
+            </div>
+            }
+
+            <button
+              type="submit"
+              [disabled]="isLoading()"
+              class="btn bg-gray-900 rounded-md px-4 py-2 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              @if (isLoading()) {
+              <div
+                class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
+              ></div>
+              Entrando... } @else { Entrar }
+            </button>
           </div>
         </form>
       </div>

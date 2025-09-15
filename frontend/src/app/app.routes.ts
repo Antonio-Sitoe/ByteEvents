@@ -4,6 +4,7 @@ import { Dashboard } from '@/pages/admin/dashboard/dashboard';
 import { SignIn } from '@/pages/auth/sign-in/sign-in';
 import { ParticipantSignIn } from '@/pages/participant/sign-in/sign-in';
 import { Confirm } from './pages/participant/confirm/confirm';
+import { AuthGuard } from '@/core/http/auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,10 +18,12 @@ export const routes: Routes = [
   {
     path: 'events',
     component: Events,
+    canActivate: [AuthGuard],
   },
   {
     path: 'dashboard/:id',
     component: Dashboard,
+    canActivate: [AuthGuard],
   },
   {
     path: 'confirm/:id',

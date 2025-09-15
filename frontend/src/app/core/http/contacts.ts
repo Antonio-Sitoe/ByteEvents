@@ -12,7 +12,7 @@ interface ContactResponse {
   providedIn: 'root',
 })
 export class ContactsService {
-  private url = http + '/contacts';
+  private url = `${http}/contacts`;
   constructor(private http: HttpClient) {}
 
   create(body: IContact): Observable<IContact> {

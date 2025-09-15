@@ -23,7 +23,7 @@ export class ZardAlertDialogService {
     config: Omit<ZardAlertDialogOptions<T>, 'zOkText' | 'zCancelText'> & {
       zOkText?: string;
       zCancelText?: string;
-    },
+    }
   ): ZardAlertDialogRef<T> {
     const confirmConfig: ZardAlertDialogOptions<T> = {
       ...config,
@@ -36,7 +36,9 @@ export class ZardAlertDialogService {
     return this.create(confirmConfig);
   }
 
-  warning<T>(config: Omit<ZardAlertDialogOptions<T>, 'zOkText'> & { zOkText?: string }): ZardAlertDialogRef<T> {
+  warning<T>(
+    config: Omit<ZardAlertDialogOptions<T>, 'zOkText'> & { zOkText?: string }
+  ): ZardAlertDialogRef<T> {
     const warningConfig: ZardAlertDialogOptions<T> = {
       ...config,
       zOkText: config.zOkText || 'OK',
@@ -47,7 +49,9 @@ export class ZardAlertDialogService {
     return this.create(warningConfig);
   }
 
-  info<T>(config: Omit<ZardAlertDialogOptions<T>, 'zOkText'> & { zOkText?: string }): ZardAlertDialogRef<T> {
+  info<T>(
+    config: Omit<ZardAlertDialogOptions<T>, 'zOkText'> & { zOkText?: string }
+  ): ZardAlertDialogRef<T> {
     const infoConfig: ZardAlertDialogOptions<T> = {
       ...config,
       zOkText: config.zOkText || 'OK',
@@ -63,7 +67,12 @@ export class ZardAlertDialogService {
 
     const alertDialogContainer = this.attachAlertDialogContainer<T>(overlayRef, config);
 
-    const alertDialogRef = this.attachAlertDialogContent<T>(componentOrTemplateRef, alertDialogContainer, overlayRef, config);
+    const alertDialogRef = this.attachAlertDialogContent<T>(
+      componentOrTemplateRef,
+      alertDialogContainer,
+      overlayRef,
+      config
+    );
     alertDialogContainer.alertDialogRef = alertDialogRef;
 
     return alertDialogRef;
@@ -88,10 +97,13 @@ export class ZardAlertDialogService {
       ],
     });
 
-    const containerPortal = new ComponentPortal<ZardAlertDialogComponent<T>>(ZardAlertDialogComponent, config.zViewContainerRef, injector);
+    const containerPortal = new ComponentPortal<ZardAlertDialogComponent<T>>(
+      ZardAlertDialogComponent,
+      config.zViewContainerRef,
+      injector
+    );
     const containerRef = overlayRef.attach<ZardAlertDialogComponent<T>>(containerPortal);
 
-    // Pequeno delay para evitar reflow durante a renderização inicial
     setTimeout(() => {
       containerRef.instance.state.set('open');
     }, 10);
@@ -103,27 +115,31 @@ export class ZardAlertDialogService {
     componentOrTemplateRef: ContentType<T>,
     alertDialogContainer: ZardAlertDialogComponent<T>,
     overlayRef: OverlayRef,
-    config: ZardAlertDialogOptions<T>,
+    config: ZardAlertDialogOptions<T>
   ) {
     const alertDialogRef = new ZardAlertDialogRef<T>(overlayRef, config, alertDialogContainer);
 
     if (componentOrTemplateRef instanceof TemplateRef) {
       alertDialogContainer.attachTemplatePortal(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         new TemplatePortal<T>(componentOrTemplateRef, null!, {
           alertDialogRef: alertDialogRef,
-        } as any),
+        } as any)
       );
     } else if (componentOrTemplateRef && typeof componentOrTemplateRef !== 'string') {
       const injector = this.createInjector<T>(alertDialogRef, config);
-      const contentRef = alertDialogContainer.attachComponentPortal<T>(new ComponentPortal(componentOrTemplateRef, config.zViewContainerRef, injector));
+      const contentRef = alertDialogContainer.attachComponentPortal<T>(
+        new ComponentPortal(componentOrTemplateRef, config.zViewContainerRef, injector)
+      );
       alertDialogRef.componentInstance = contentRef.instance;
     }
 
     return alertDialogRef;
   }
 
-  private createInjector<T>(alertDialogRef: ZardAlertDialogRef<T>, config: ZardAlertDialogOptions<T>) {
+  private createInjector<T>(
+    alertDialogRef: ZardAlertDialogRef<T>,
+    config: ZardAlertDialogOptions<T>
+  ) {
     return Injector.create({
       parent: this.injector,
       providers: [

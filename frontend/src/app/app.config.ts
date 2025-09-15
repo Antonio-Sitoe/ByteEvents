@@ -4,7 +4,7 @@ import {
   provideZoneChangeDetection,
   LOCALE_ID,
 } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -35,6 +35,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 import { routes } from './app.routes';
+import { AuthInterceptor } from './core/http/auth.interceptor';
 
 registerLocaleData(localePt);
 
@@ -42,7 +43,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([AuthInterceptor])),
     provideRouter(routes),
     provideIcons({
       lucideLogOut,
