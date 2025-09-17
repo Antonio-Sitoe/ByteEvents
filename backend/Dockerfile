@@ -16,4 +16,4 @@ RUN mkdir -p uploads
 
 EXPOSE 3333
 
-CMD ["sh", "-c", "PORT=${PORT:-3333} npm start"]
+CMD ["sh", "-c", "PORT=${PORT:-10000} npm start"]

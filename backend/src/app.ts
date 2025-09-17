@@ -50,9 +50,12 @@ const app = Fastify()
   .register(invitationRoutes)
 
 app
-  .listen({ port: env.PORT })
+  .listen({
+    port: env.PORT,
+    host: '0.0.0.0',
+  })
   .then(() => {
-    console.log(`Server is running on port http://localhost:${env.PORT}`)
+    console.log(`Server is running on port ${env.PORT}`)
   })
   .catch((err) => {
     console.log(err)
