@@ -4,7 +4,7 @@
   "description": "Sistema de Gestão de Eventos - Backend",
   "main": "dist/app.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/app.js",
     "dev": "tsx watch src/app.ts",
     "worker": "tsx watch src/lib/email/email-worker.ts",
@@ -46,6 +46,7 @@
     "nodemailer": "^7.0.6",
     "pg": "^8.16.3",
     "qrcode": "^1.5.4",
+    "tsc-alias": "^1.8.16",
     "uuid": "^11.0.3",
     "zod": "^4.1.5"
   },
