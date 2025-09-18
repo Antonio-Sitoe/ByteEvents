@@ -14,6 +14,7 @@ const envSchema = z.object({
   FRONTEND_URL: z.url(),
   EMAIL_HOST: z.string().default('localhost'),
   EMAIL_PORT: z.string().default('6379').transform(Number),
+  EMAIL_REDIS_PASSWORD: z.string().optional(),
   EMAIL_USER: z.string().optional(),
   EMAIL_PASSWORD: z.string().optional(),
 })
