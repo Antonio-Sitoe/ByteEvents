@@ -35,7 +35,13 @@
         <z-form-control
           [errorMessage]="isFieldInvalid('end_datetime') ? 'Data de fim é obrigatória' : ''"
         >
-          <input z-input id="end_datetime" type="datetime-local" formControlName="end_datetime" />
+          <input
+            z-input
+            id="end_datetime"
+            class="w-full text-black"
+            type="datetime-local"
+            formControlName="end_datetime"
+          />
         </z-form-control>
       </z-form-field>
     </div>
