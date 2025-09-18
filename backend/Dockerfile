@@ -14,6 +14,9 @@ RUN npm ci --only=production --no-audit --no-fund && npm cache clean --force
 
 RUN mkdir -p uploads
 
-EXPOSE 3333
+COPY start.sh ./
+RUN chmod +x start.sh
 
-CMD ["sh", "-c", "PORT=${PORT:-10000} npm start"]
+EXPOSE 10000
+
+CMD ["./start.sh"]

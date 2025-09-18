@@ -12,7 +12,9 @@
     "migrate": "npx drizzle-kit migrate",
     "studio": "npx drizzle-kit studio",
     "seed": "tsx src/db/seed.ts",
-    "lint": "biome lint . && biome lint --write . && biome format --write . && tsc --noEmit"
+    "lint": "biome lint . && biome lint --write . && biome format --write . && tsc --noEmit",
+    "start:full": "./start-render.sh",
+    "start:docker": "./start.sh"
   },
   "keywords": [
     "events",
