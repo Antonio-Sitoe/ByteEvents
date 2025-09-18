@@ -67,8 +67,7 @@
 
             <button
               type="submit"
-              [disabled]="isLoading()"
-              class="btn bg-gray-900 rounded-md px-4 py-2 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              class="btn bg-gray-900 rounded-md px-4 py-2 text-white font-medium disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-100 flex items-center justify-center gap-2"
             >
               @if (isLoading()) {
               <div
