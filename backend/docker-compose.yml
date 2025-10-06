@@ -16,7 +16,7 @@ services:
     container_name: byteevents-redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "6380:6380"
     volumes:
       - redis_data:/data
 

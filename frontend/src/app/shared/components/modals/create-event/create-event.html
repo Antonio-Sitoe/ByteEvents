@@ -15,7 +15,7 @@
     </z-form-field>
 
     <div class="flex items-start gap-4">
-      <z-form-field>
+      <z-form-field class="flex-1">
         <label z-form-label for="start_datetime">Data de inicio do evento</label>
         <z-form-control
           [errorMessage]="isFieldInvalid('start_datetime') ? 'Data de início é obrigatória' : ''"
@@ -26,11 +26,12 @@
             type="datetime-local"
             placeholder="Data de inicio"
             formControlName="start_datetime"
+            class="text-black"
           />
         </z-form-control>
       </z-form-field>
 
-      <z-form-field>
+      <z-form-field class="flex-1">
         <label z-form-label for="end_datetime">Data do fim do evento</label>
         <z-form-control
           [errorMessage]="isFieldInvalid('end_datetime') ? 'Data de fim é obrigatória' : ''"
